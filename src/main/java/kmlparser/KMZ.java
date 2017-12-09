@@ -15,7 +15,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import de.micromata.opengis.kml.v_2_2_0.Kml;
 
-public class KmzConverter extends JPanel {
+public class KMZ extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -25,14 +25,14 @@ public class KmzConverter extends JPanel {
 	private JCheckBox clean;
 	private File source, image;
 	
-	public KmzConverter() {
+	public KMZ() {
 		this.setLayout(null);
 		organizeUIComponents();
 		setComponentEventListeners();
 	}
 	
 	private void setComponentEventListeners() {
-		final KmzConverter parent = this;
+		final KMZ parent = this;
 		srcBtn.addActionListener(new ActionListener() {
 			
 			@Override

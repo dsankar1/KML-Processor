@@ -4,9 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -43,11 +41,11 @@ public class Filter extends JPanel {
 	private JButton srcBtn, filterBtn;
 	private JTextField trgText, storeText, latitudeText, longitudeText, radiusText;
 	private JCheckBox clean;
-	private JCheckBox southBox, northeastBox, midwestBox, 
-		northAtlanticBox, midAtlanticBox, southwestBox,
-		rockyMountainBox, pacificNorthwestBox, floridaBox;
 	private File source, target;
 	private volatile boolean loading = false;
+	/*private JCheckBox southBox, northeastBox, midwestBox, 
+		northAtlanticBox, midAtlanticBox, southwestBox,
+		rockyMountainBox, pacificNorthwestBox, floridaBox;*/
 	
 	public Filter() {
 		this.setLayout(null);
@@ -55,7 +53,7 @@ public class Filter extends JPanel {
 		setComponentEventListeners();
 	}
 	
-	private void addSouth(Set<String> filter) {
+	/*private void addSouth(Set<String> filter) {
 		filter.addAll(Arrays.asList(SOUTH_VALUES));
 	}
 	
@@ -89,7 +87,7 @@ public class Filter extends JPanel {
 	
 	private void addFlorida(Set<String> filter) {
 		filter.addAll(Arrays.asList(FLORIDA_VALUES));
-	}
+	}*/
 	
 	private void setComponentEventListeners() {
 		final Filter parent = this;
@@ -207,10 +205,17 @@ public class Filter extends JPanel {
 	
 	private boolean withinRadius(double lat1, double lon1, double lat2, double lon2, double radius) {
 		final double EARTHS_RADIUS = 6371.0; //Kilometers
+		double latHigh, latLow, lonHigh, lonLow;
+		
+		latHigh = Math.max(lat1, lat2);
+		latLow = Math.min(lat1, lat2);
+		lonHigh = Math.max(lon1, lon2);
+		lonLow = Math.min(lon1, lon2);
+		
+		double latDelta = Math.toRadians(latHigh - latLow);
+		double lonDelta = Math.toRadians(lonHigh - lonLow);
 		double lat1Rad = Math.toRadians(lat1);
 		double lat2Rad = Math.toRadians(lat2);
-		double latDelta = Math.toRadians(Math.abs(lat2) - Math.abs(lat1));
-		double lonDelta = Math.toRadians(Math.abs(lon2) - Math.abs(lon1));
 		
 		double a = (Math.sin(latDelta/2D) * Math.sin(latDelta/2D))
 				+ (Math.cos(lat1Rad) * Math.cos(lat2Rad))

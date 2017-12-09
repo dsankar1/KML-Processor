@@ -1,7 +1,6 @@
 package kmlparser;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 public class Window extends JTabbedPane {
@@ -11,21 +10,12 @@ public class Window extends JTabbedPane {
 	public Window() {
 		this.addTab("Filter", null, new Filter(),
                 "Filter stores by location");
-		this.addTab("Edit", null, editTab(),
+		this.addTab("Edit", null, new Edit(),
                 "Add/Remove store locations");
-		this.addTab("KMZ", null, new KmzConverter(),
+		this.addTab("KMZ", null, new KMZ(),
                 "Convert Kml to Kmz");
 		
 		createWindow(this);
-	}
-	
-	private JPanel editTab() {
-		JPanel panel = new JPanel();
-		panel.setLayout(null);
-		
-		
-		
-		return panel;
 	}
 	
 	private void createWindow(JTabbedPane panel) {
@@ -34,7 +24,7 @@ public class Window extends JTabbedPane {
 		frame.setSize(410, 470);
 		frame.setLocationRelativeTo(null);
 		frame.setResizable(false);
-		frame.add(this);
+		frame.setContentPane(this);;
 		frame.setVisible(true);
 	}
 	
